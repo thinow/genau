@@ -1,5 +1,9 @@
 import React from 'react';
+import Loading from './loading/Loading'
 
 export default () => (
-  <h1>Hello World !</h1>
+  <div>
+    <h1>Wiederhol!</h1>
+    <Loading />
+  </div>
 );
