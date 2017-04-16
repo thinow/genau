@@ -1,6 +1,6 @@
 import { takeEvery, call, put, fork } from 'redux-saga/effects';
 import * as actions from '../actions/all';
-import api from '../api/api';
+import api from '../api/api-fake';
 
 export function* checkAvailabilityOfTheAPI() {
   const { response } = yield call(api, 'GET', '/status');
