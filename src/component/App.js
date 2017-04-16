@@ -6,13 +6,17 @@ import * as selectors from '../redux/selectors/selectors';
 import * as actions from '../redux/actions/all';
 
 class Presentation extends Component {
+
+  componentDidMount() {
+    this.props.loadAppRequest();
+  }
+
   render() {
-    const { loaded, loadApp } = this.props;
+    const { loaded } = this.props;
 
     return (
       <div>
         <h1>Wiederhol!</h1>
-        <button onClick={loadApp}>Test action</button>
         {loaded ? <Menu /> : <Loading />}
       </div>
     );
@@ -27,7 +31,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadApp: () => dispatch({ type: actions.APP_LOADING_SUCCESS })
+    loadAppRequest: () => dispatch({ type: actions.APP_LOADING_REQUEST })
   };
 };
 
