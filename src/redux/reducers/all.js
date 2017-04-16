@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import commons from './commons';
+import core from './core';
 
 export default combineReducers({
-  commons
+  core
 });

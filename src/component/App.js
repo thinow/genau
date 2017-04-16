@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Loading from './loading/Loading';
 import Menu from './menu/Menu';
 import { connect } from 'react-redux';
+import * as selectors from '../redux/selectors/selectors';
 import * as actions from '../redux/actions/all';
 
 class Presentation extends Component {
@@ -20,7 +21,7 @@ class Presentation extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    loaded: state.commons.loaded
+    loaded: selectors.isLoaded(state)
   };
 };
 
