@@ -1,10 +1,12 @@
 import http from 'http';
 
-export default (method, path) => {
+const API_DOMAIN = process.env.NODE_ENV === 'production' ? 'http://demo5395517.mockable.io' : 'http://localhost:8080';
+
+export default (method, uri) => {
   const request = http[method.toLowerCase()];
 
   const promise = new Promise((resolve, reject) => {
-    request({ path }, (response) => {
+    request({ path: `${API_DOMAIN}${uri}` }, (response) => {
 
       const data = [];
       response.on('data', (chunk) => data.push(chunk));

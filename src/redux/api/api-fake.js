@@ -1,1 +1,0 @@
-export default () => ({ response: 'FAKE-DATA' });
