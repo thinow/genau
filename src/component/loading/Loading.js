@@ -1,5 +1,9 @@
 import React from 'react';
+import CircularProgress from 'material-ui/CircularProgress';
 
 export default () => (
-  <p>Laden...</p>
+  <div>
+    <CircularProgress style={{marginTop: '12px'}} />
+    <p>Laden...</p>
+  </div>
 );
