@@ -2,6 +2,7 @@
   "name": "genau",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://thinow.github.io/genau",
   "dependencies": {
     "http": "0.0.0",
     "react": "^15.5.4",
@@ -12,12 +13,14 @@
     "redux-saga": "^0.14.6"
   },
   "devDependencies": {
+    "gh-pages": "^0.12.0",
     "node-mock-server": "^0.12.1",
     "react-scripts": "0.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run build&&gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
