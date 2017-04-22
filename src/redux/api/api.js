@@ -1,6 +1,6 @@
 import http from 'http';
 
-const API_DOMAIN = process.env.NODE_ENV === 'production' ? 'https://intense-reef-19040.herokuapp.com' : 'http://localhost:8080';
+const API_DOMAIN = process.env.NODE_ENV === 'production' ? 'https://genau-service.herokuapp.com' : 'http://localhost:8080';
 
 export default (method, uri) => {
   const request = http[method.toLowerCase()];
