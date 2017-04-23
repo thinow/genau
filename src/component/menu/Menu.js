@@ -1,10 +1,26 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import Text from '../core/Text';
+
+const style = {
+  container: { textAlign: 'center' },
+  title: { margin: '8vh 0 ' },
+  button: { display: 'block', margin: '3vh 18vw' }
+};
+
+
+const EXERCISES = ['Der, Die, Das', 'Plural', 'Perfekt', 'Präteritum', 'Alles!'];
 
 export default () => {
-  const exercises = ['DER / DIE / DAS', 'Perfekt'];
-  
+
   return (
-    <div>{exercises.map(exercise => <FlatButton key={exercise} label={exercise} primary={true} />)}</div>
+    <div style={style.container}>
+      <Text style={style.title}>Was möchtest du üben ?</Text>
+      {
+        EXERCISES.map(exercise => {
+          return <RaisedButton key={exercise} label={exercise} style={style.button} primary={true} />;
+        })
+      }
+    </div>
   );
 };
