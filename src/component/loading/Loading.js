@@ -2,8 +2,8 @@ import React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 
 export default () => (
-  <div>
-    <CircularProgress style={{marginTop: '12px'}} />
-    <p>Laden...</p>
+  <div style={{textAlign: 'center'}}>
+    <CircularProgress style={{marginTop: '16vh'}} size={60} thickness={5} />
+    <p style={{ fontSize: '7vw' }}>Laden...</p>
   </div>
 );
