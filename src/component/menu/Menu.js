@@ -10,8 +10,8 @@ const style = {
   button: { display: 'block', margin: '3vh 18vw' }
 };
 
-export default () => (
-  <div style={style.container}>
+export default ({ style: inheritedStyle }) => (
+  <div style={{ ...inheritedStyle, ...style.container }}>
     <Text style={style.title}>Was möchtest du üben ?</Text>
     {
       EXERCISES.map(exercise => {

@@ -9,8 +9,8 @@ const style = {
   text: { fontSize: '7vw', color: palette.primary1Color, marginTop: '6vh' }
 };
 
-export default () => (
-  <div style={style.container}>
+export default ({ style: inheritedStyle }) => (
+  <div style={{ ...inheritedStyle, ...style.container }}>
     <CircularProgress style={style.progress} size={60} thickness={5} />
     <Text style={style.text}>Laden...</Text>
   </div>
