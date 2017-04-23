@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import theme from './theme/theme';
 import AppBar from 'material-ui/AppBar';
 import Loading from './loading/Loading';
 import Menu from './menu/Menu';
@@ -21,7 +23,7 @@ class Presentation extends Component {
     const { loaded } = this.props;
 
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
         <div>
           <AppBar title="Genau!" />
           {loaded ? <Menu /> : <Loading />}
