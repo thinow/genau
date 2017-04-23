@@ -1,3 +1,5 @@
-import theme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import chooseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
-export default theme;
+export const theme = chooseTheme;
+
+export const palette = chooseTheme.palette;
