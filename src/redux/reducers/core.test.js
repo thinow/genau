@@ -1,29 +1,25 @@
 import reducer from './core';
 import * as actions from '../actions/all';
-import deepFreeze from 'deep-freeze';
-
-const freeze = ({ previousState, action }) => ({
-  previousState: deepFreeze(previousState),
-  action: deepFreeze(action)
-});
+import { reduce } from './testHelper';
 
 describe('Core Reducer', () => {
 
-  it('Default State', () => expect(reducer()).toEqual({ loaded: false }));
+  it('Default State', () => reduce(undefined).byUsing(reducer).expectedNextState({ loaded: false }));
 
-  it('Unknown Action', () => expect(reducer('unchanged-state', { type: 'UNKNOWN' })).toEqual('unchanged-state'));
+  it('Unknown Action', () => reduce('state', { type: 'UNKNOWN' }).byUsing(reducer).expectedNextState('state'));
 
   it('Load App successfully', () => {
-    const given = freeze({
-      previousState: {
-        loaded: false
-      },
-      action: {
-        type: actions.APP_LOADING_SUCCESS
-      }
-    });
+    // given
+    const previousState = {
+      loaded: false
+    };
 
-    expect(reducer(given.previousState, given.action)).toEqual({
+    const action = {
+      type: actions.APP_LOADING_SUCCESS
+    };
+
+    // when / then
+    reduce(previousState, action).byUsing(reducer).expectedNextState({
       loaded: true
     });
   });
