@@ -10,7 +10,7 @@ export const convertDataIntoJSON = (data, resolve, reject) => {
 
 export default (method, path) => {
   return new Promise((resolve, reject) => {
-    const request = http[method];
+    const request = http[method.toLowerCase()];
 
     request({ path }, (response) => {
 
