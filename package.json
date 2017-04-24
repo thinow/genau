@@ -38,7 +38,13 @@
     "start-dev-server": "webpack-dev-server",
     "start-mock-server": "node ./mock-server/start.js",
     "test": "jest",
+    "test-coverage": "jest --coverage",
     "build": "npm run test && webpack",
     "deploy": "npm run build && gh-pages -d build"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
   }
 }
