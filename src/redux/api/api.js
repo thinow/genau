@@ -1,21 +1,18 @@
-import http from 'http';
+import fetch from './fetch';
 
-const API_DOMAIN = process.env.NODE_ENV === 'production' ? 'https://genau-service.herokuapp.com' : 'http://localhost:8080';
+const REQUEST_PATTERN = /([A-Z]*):(.*)/;
 
-export default (method, uri) => {
-  const request = http[method.toLowerCase()];
+const parse = (request) => {
+  const domain = process.env.API_DOMAIN;
+  const [, method, uri] = REQUEST_PATTERN.exec(request);
 
-  const promise = new Promise((resolve, reject) => {
-    request({ path: `${API_DOMAIN}${uri}` }, (response) => {
+  return { method, path: `${domain}${uri}` };
+};
 
-      const data = [];
-      response.on('data', (chunk) => data.push(chunk));
-      response.on('end', () => resolve(JSON.parse(data.join(''))));
-      response.on('error', (error) => reject(error));
-    })
-  });
+export default (request) => {
+  const { method, path } = parse(request);
 
-  return promise
+  return fetch(method, path)
     .then(response => ({ response }))
     .catch(error => ({ error }));
 };

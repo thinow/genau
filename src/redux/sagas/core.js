@@ -3,7 +3,7 @@ import * as actions from '../actions/all';
 import api from '../api/api';
 
 export function* checkAvailabilityOfTheAPI() {
-  const { response } = yield call(api, 'GET', '/api/status');
+  const { response } = yield call(api, 'GET:/api/status');
 
   if (response) yield put({ type: actions.APP_LOADING_SUCCESS, response });
 }

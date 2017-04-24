@@ -23,7 +23,8 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production')
+        NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
+        API_DOMAIN: JSON.stringify(isDevelopment ? 'http://localhost:8080' : 'https://genau-service.herokuapp.com')
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
