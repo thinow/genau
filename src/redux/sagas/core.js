@@ -5,7 +5,7 @@ import api from '../api/api';
 export function* checkAvailabilityOfTheAPI() {
   const { response } = yield call(api, 'GET:/api/status');
 
-  if (response) yield put({ type: actions.APP_LOADING_SUCCESS, response });
+  if (response) yield put({ type: actions.APP_LOADING_SUCCESS });
 }
 
 export function* listenAppLoadingRequest() {
