@@ -23,4 +23,14 @@ describe('Selectors', () => {
     });
   });
 
+  it('Error', () => {
+    // given
+    const state = {
+      error: { displayed: true, error: 'Error' }
+    };
+
+    // when / then
+    expect(selectors.getError(state)).toEqual({ displayed: true, error: 'Error' });
+  });
+
 });

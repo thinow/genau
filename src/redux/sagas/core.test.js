@@ -34,6 +34,10 @@ describe('Core Saga', () => {
         returns: { error: 'Error' }
       });
 
+      iterator.next({
+        equals: put({ type: actions.ERROR_OCCURRED, error: 'Error' })
+      });
+
       iterator.hasNoMoreElements();
     });
   });
