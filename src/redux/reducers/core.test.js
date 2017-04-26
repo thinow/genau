@@ -22,6 +22,20 @@ describe('Core Reducer', () => {
     });
   });
 
+  describe('Menu', () => {
+    it('When display menu, should display the menu', () => {
+      // given
+      const previousState = { page: 'any' };
+
+      const action = actions.DISPLAY_MENU.create();
+
+      // when / then
+      reduce(previousState, action).byUsing(reducer).expectedNextState({
+        page: 'menu'
+      });
+    });
+  });
+
   describe('Get Question', () => {
     it('When request for a question, should display the loading', () => {
       // given
