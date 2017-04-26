@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Loading from './loading/Loading';
 import Menu from './menu/Menu';
+import Question from './question/Question';
 import ErrorBar from './errorbar/ErrorBar';
 import { connect } from 'react-redux';
 import * as selectors from '../redux/selectors/selectors';
 import * as actions from '../redux/actions/all';
+
+const pages = [
+  { name: 'loading', component: Loading },
+  { name: 'menu', component: Menu },
+  { name: 'question', component: Question }
+];
 
 const mapProps = (state) => ({
   page: selectors.getPage(state)
@@ -22,17 +29,9 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
   }
 
   createPageComponent = () => {
-    switch (this.props.page) {
-      case 'menu':
-        return <Menu />;
+    const { component } = pages.find(({ name }) => name === this.props.page);
 
-      case 'question':
-        return <div>TODO: display question...</div>;
-
-      default:
-      case 'loading':
-        return <Loading />;
-    }
+    return React.createElement(component);
   };
 
   render() {
