@@ -6,21 +6,19 @@ import * as selectors from '../../redux/selectors/selectors';
 
 const DURATION = 4000; // 4 seconds
 
-const Presentation = ({ error, onRequestClose }) => (
+const mapProps = (state) => ({
+  error: selectors.getError(state)
+});
+
+const mapCallbacks = (dispatch) => ({
+  onRequestClose: () => dispatch({ type: actions.ERROR_HIDDEN })
+});
+
+export default connect(mapProps, mapCallbacks)(({ error, onRequestClose }) => (
   <Snackbar
     open={error.displayed}
     message="Ups! Ich habe eine Fehler gemacht..."
     autoHideDuration={DURATION}
     onRequestClose={onRequestClose}
   />
-);
-
-const mapStateToProps = (state) => ({
-  error: selectors.getError(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onRequestClose: () => dispatch({ type: actions.ERROR_HIDDEN })
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Presentation);
+));

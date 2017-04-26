@@ -7,7 +7,15 @@ import { connect } from 'react-redux';
 import * as selectors from '../redux/selectors/selectors';
 import * as actions from '../redux/actions/all';
 
-class Presentation extends Component {
+const mapProps = (state) => ({
+  loaded: selectors.isLoaded(state)
+});
+
+const mapCallbacks = (dispatch) => ({
+  loadAppRequest: () => dispatch({ type: actions.APP_LOADING_REQUEST })
+});
+
+export default connect(mapProps, mapCallbacks)(class extends Component {
 
   componentDidMount() {
     this.props.loadAppRequest();
@@ -24,18 +32,4 @@ class Presentation extends Component {
       </div>
     );
   }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    loaded: selectors.isLoaded(state)
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadAppRequest: () => dispatch({ type: actions.APP_LOADING_REQUEST })
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Presentation);
+});
