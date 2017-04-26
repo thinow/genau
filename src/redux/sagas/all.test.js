@@ -1,6 +1,7 @@
 import { fork } from 'redux-saga/effects';
 import createAllSagas from './all';
 import core from './core';
+import questions from './questions';
 
 it('Sagas (all.js)', () => {
   // when
@@ -8,6 +9,7 @@ it('Sagas (all.js)', () => {
 
   // then
   expect(sagas.next().value).toEqual([
-    fork(core)
+    fork(core),
+    fork(questions)
   ]);
 });

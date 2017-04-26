@@ -13,6 +13,11 @@ export const GET_QUESTION_REQUEST = {
   create: (category) => ({ type: 'GET_QUESTION_REQUEST', category })
 };
 
+export const GET_QUESTION_SUCCESS = {
+  name: 'GET_QUESTION_SUCCESS',
+  create: (question) => ({ type: 'GET_QUESTION_SUCCESS', question })
+};
+
 export const ERROR_OCCURRED = {
   name: 'ERROR_OCCURRED',
   create: () => ({ type: 'ERROR_OCCURRED' })
