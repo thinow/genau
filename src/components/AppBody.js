@@ -25,7 +25,8 @@ const mapProps = (state) => ({
 });
 
 const mapCallbacks = (dispatch) => ({
-  loadAppRequest: () => dispatch(actions.APP_LOADING_REQUEST.create())
+  loadAppRequest: () => dispatch(actions.APP_LOADING_REQUEST.create()),
+  displayMenu: () => dispatch(actions.DISPLAY_MENU.create())
 });
 
 export default connect(mapProps, mapCallbacks)(class extends Component {
@@ -36,7 +37,7 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
 
   createMenuIcon = () => (
     <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}>
-      <MenuItem primaryText="Menu" />
+      <MenuItem primaryText="Menu" onTouchTap={this.props.displayMenu} />
     </IconMenu>
   );
 
