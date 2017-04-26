@@ -1,0 +1,20 @@
+{
+  "category": "perfect",
+  "label": "machen",
+  "translation": "to do, to make",
+  "options": [
+    {
+      "value": "er hat gemacht",
+      "correct": true
+    },
+    {
+      "value": "er hat gemachen"
+    },
+    {
+      "value": "er ist gemachen"
+    },
+    {
+      "value": "er ist gemacht"
+    }
+  ]
+}
