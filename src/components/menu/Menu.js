@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/actions/all';
 import RaisedButton from 'material-ui/RaisedButton';
 import Text from '../core/Text';
 
 const exercises = [
-  { id: 'article', label: 'Der, Die, Das' },
-  { id: 'plural', label: 'Plural' },
-  { id: 'perfect', label: 'Perfekt' },
-  { id: 'simple-past', label: 'Präteritum' },
-  { id: 'all', label: 'Alles!' }
+  { category: 'article', label: 'Der, Die, Das' },
+  { category: 'plural', label: 'Plural' },
+  { category: 'perfect', label: 'Perfekt' },
+  { category: 'simple-past', label: 'Präteritum' },
+  { category: 'all', label: 'Alles!' }
 ];
 
 const style = {
@@ -16,18 +18,25 @@ const style = {
   button: { display: 'block', margin: '3vh 18vw' }
 };
 
-export default () => (
+const mapProps = (state) => ({});
+
+const mapCallbacks = (dispatch) => ({
+  onButtonClick: (category) => dispatch({ type: actions.GET_QUESTION_REQUEST, category })
+});
+
+export default connect(mapProps, mapCallbacks)(({ onButtonClick }) => (
   <div style={style.container}>
     <Text style={style.title}>Was möchtest du üben ?</Text>
-    {exercises.map(({ id, label }) => {
+    {exercises.map(({ category, label }) => {
       return (
         <RaisedButton
-          key={id}
+          key={category}
           label={label}
-          style={style.button}
+          onClick={() => onButtonClick(category)}
           primary={true}
+          style={style.button}
         />
       );
     })}
   </div>
-);
+));
