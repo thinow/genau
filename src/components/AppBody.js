@@ -8,7 +8,7 @@ import * as selectors from '../redux/selectors/selectors';
 import * as actions from '../redux/actions/all';
 
 const mapProps = (state) => ({
-  loaded: selectors.isLoaded(state)
+  page: selectors.getPage(state)
 });
 
 const mapCallbacks = (dispatch) => ({
@@ -21,13 +21,25 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
     this.props.loadAppRequest();
   }
 
-  render() {
-    const { loaded } = this.props;
+  createPageComponent = () => {
+    switch (this.props.page) {
+      case 'menu':
+        return <Menu />;
 
+      case 'question':
+        return <div>TODO: display question...</div>;
+
+      default:
+      case 'loading':
+        return <Loading />;
+    }
+  };
+
+  render() {
     return (
       <div>
         <AppBar title="Genau!" />
-        {loaded ? <Menu /> : <Loading />}
+        {this.createPageComponent()}
         <ErrorBar />
       </div>
     );

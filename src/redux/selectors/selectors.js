@@ -1,3 +1,3 @@
-export const isLoaded = state => state.core.loaded;
+export const getPage = state => state.core.page;
 
 export const getError = state => state.error;
