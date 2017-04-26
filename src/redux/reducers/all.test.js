@@ -6,5 +6,6 @@ it('Reducers (all.js)', () => {
 
   // then
   expect(Object.keys(state)).toContain('core');
+  expect(Object.keys(state)).toContain('question');
   expect(Object.keys(state)).toContain('error');
 });

@@ -14,6 +14,16 @@ describe('Selectors', () => {
     });
   });
 
+  it('Question', () => {
+    // given
+    const state = {
+      question: { label: 'QUESTION' }
+    };
+
+    // when / then
+    expect(selectors.getCurrentQuestion(state)).toEqual({ label: 'QUESTION' });
+  });
+
   it('Error', () => {
     // given
     const state = {
