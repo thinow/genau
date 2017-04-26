@@ -2,7 +2,13 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import Text from '../core/Text';
 
-const EXERCISES = ['Der, Die, Das', 'Plural', 'Perfekt', 'Präteritum', 'Alles!'];
+const exercises = [
+  { id: 'article', label: 'Der, Die, Das' },
+  { id: 'plural', label: 'Plural' },
+  { id: 'perfect', label: 'Perfekt' },
+  { id: 'simple-past', label: 'Präteritum' },
+  { id: 'all', label: 'Alles!' }
+];
 
 const style = {
   container: { textAlign: 'center' },
@@ -13,10 +19,15 @@ const style = {
 export default () => (
   <div style={style.container}>
     <Text style={style.title}>Was möchtest du üben ?</Text>
-    {
-      EXERCISES.map(exercise => {
-        return <RaisedButton key={exercise} label={exercise} style={style.button} primary={true} />;
-      })
-    }
+    {exercises.map(({ id, label }) => {
+      return (
+        <RaisedButton
+          key={id}
+          label={label}
+          style={style.button}
+          primary={true}
+        />
+      );
+    })}
   </div>
 );
