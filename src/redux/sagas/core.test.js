@@ -18,7 +18,7 @@ describe('Core Saga', () => {
       });
 
       iterator.next({
-        equals: put({ type: actions.APP_LOADING_SUCCESS })
+        equals: put(actions.APP_LOADING_SUCCESS.create())
       });
 
       iterator.hasNoMoreElements();
@@ -35,7 +35,7 @@ describe('Core Saga', () => {
       });
 
       iterator.next({
-        equals: put({ type: actions.ERROR_OCCURRED, error: 'Error' })
+        equals: put(actions.ERROR_OCCURRED.create())
       });
 
       iterator.hasNoMoreElements();

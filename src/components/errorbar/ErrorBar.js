@@ -11,7 +11,7 @@ const mapProps = (state) => ({
 });
 
 const mapCallbacks = (dispatch) => ({
-  onRequestClose: () => dispatch({ type: actions.ERROR_HIDDEN })
+  onRequestClose: () => dispatch(actions.ERROR_HIDDEN.create())
 });
 
 export default connect(mapProps, mapCallbacks)(({ error, onRequestClose }) => (

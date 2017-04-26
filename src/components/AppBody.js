@@ -12,7 +12,7 @@ const mapProps = (state) => ({
 });
 
 const mapCallbacks = (dispatch) => ({
-  loadAppRequest: () => dispatch({ type: actions.APP_LOADING_REQUEST })
+  loadAppRequest: () => dispatch(actions.APP_LOADING_REQUEST.create())
 });
 
 export default connect(mapProps, mapCallbacks)(class extends Component {

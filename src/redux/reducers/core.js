@@ -5,7 +5,7 @@ const createDefaultState = ()=> ({ loaded: false });
 export default (state = createDefaultState(), action = {}) => {
   switch (action.type) {
 
-    case type.APP_LOADING_SUCCESS:
+    case type.APP_LOADING_SUCCESS.name:
       return { loaded: true };
 
     default:

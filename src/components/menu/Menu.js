@@ -21,7 +21,7 @@ const style = {
 const mapProps = (state) => ({});
 
 const mapCallbacks = (dispatch) => ({
-  onButtonClick: (category) => dispatch({ type: actions.GET_QUESTION_REQUEST, category })
+  onButtonClick: (category) => dispatch(actions.GET_QUESTION_REQUEST.create(category))
 });
 
 export default connect(mapProps, mapCallbacks)(({ onButtonClick }) => (

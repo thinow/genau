@@ -14,28 +14,21 @@ describe('Core Reducer', () => {
       displayed: false
     };
 
-    const action = {
-      type: actions.ERROR_OCCURRED,
-      error: 'Error'
-    };
+    const action = actions.ERROR_OCCURRED.create();
 
     // when / then
     reduce(previousState, action).byUsing(reducer).expectedNextState({
-      displayed: true,
-      error: 'Error'
+      displayed: true
     });
   });
 
   it('Error is hidden', () => {
     // given
     const previousState = {
-      displayed: true,
-      error: 'Error'
+      displayed: true
     };
 
-    const action = {
-      type: actions.ERROR_HIDDEN
-    };
+    const action = actions.ERROR_HIDDEN.create();
 
     // when / then
     reduce(previousState, action).byUsing(reducer).expectedNextState({

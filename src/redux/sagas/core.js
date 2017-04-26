@@ -3,16 +3,16 @@ import * as actions from '../actions/all';
 import api from '../api/api';
 
 export function* checkAvailabilityOfTheAPI() {
-  const { response, error } = yield call(api, 'GET:/api/status');
+  const { response } = yield call(api, 'GET:/api/status');
 
   if (response)
-    yield put({ type: actions.APP_LOADING_SUCCESS });
+    yield put(actions.APP_LOADING_SUCCESS.create());
   else
-    yield put({ type: actions.ERROR_OCCURRED, error });
+    yield put(actions.ERROR_OCCURRED.create());
 }
 
 export function* listenAppLoadingRequest() {
-  yield takeEvery(actions.APP_LOADING_REQUEST, checkAvailabilityOfTheAPI);
+  yield takeEvery(actions.APP_LOADING_REQUEST.name, checkAvailabilityOfTheAPI);
 }
 
 export default function* rootSaga() {

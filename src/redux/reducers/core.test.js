@@ -14,9 +14,7 @@ describe('Core Reducer', () => {
       loaded: false
     };
 
-    const action = {
-      type: actions.APP_LOADING_SUCCESS
-    };
+    const action = actions.APP_LOADING_SUCCESS.create();
 
     // when / then
     reduce(previousState, action).byUsing(reducer).expectedNextState({
