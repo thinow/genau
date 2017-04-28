@@ -23,6 +23,11 @@ export const GET_QUESTION_SUCCESS = {
   create: (question) => ({ type: 'GET_QUESTION_SUCCESS', question })
 };
 
+export const NEXT_QUESTION = {
+  name: 'NEXT_QUESTION',
+  create: () => ({ type: 'NEXT_QUESTION' })
+};
+
 export const ERROR_OCCURRED = {
   name: 'ERROR_OCCURRED',
   create: () => ({ type: 'ERROR_OCCURRED' })
