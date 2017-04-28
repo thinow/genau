@@ -20,7 +20,7 @@ const mapProps = (state) => ({
 });
 
 const mapCallbacks = (dispatch) => ({
-  onNextClick: () => dispatch(actions.GET_QUESTION_REQUEST.create())
+  onNextClick: () => dispatch(actions.NEXT_QUESTION.create())
 });
 
 const createButton = ({ value }) => (
