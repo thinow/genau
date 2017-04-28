@@ -14,6 +14,16 @@ describe('Selectors', () => {
     });
   });
 
+  it('Selected category', () => {
+    // given
+    const state = {
+      core: { selectedCategory: 'CATEGORY' }
+    };
+
+    // when / then
+    expect(selectors.getSelectedCategory(state)).toEqual('CATEGORY');
+  });
+
   it('Question', () => {
     // given
     const state = {

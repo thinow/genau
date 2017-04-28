@@ -1,8 +1,9 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { createTestableIterator } from './testHelper';
 import * as saga from './questions';
 import api from '../api/api';
 import * as actions from '../actions/all';
+import * as selectors from '../selectors/selectors';
 
 describe('Questions Saga', () => {
 
@@ -46,6 +47,23 @@ describe('Questions Saga', () => {
 
       iterator.hasNoMoreElements();
     });
+  });
+
+  it('Next question', () => {
+    // when
+    const iterator = createTestableIterator(saga.nextQuestion());
+
+    // then
+    iterator.next({
+      equals: select(selectors.getSelectedCategory),
+      returns: 'CATEGORY'
+    });
+
+    iterator.next({
+      equals: put(actions.GET_QUESTION_REQUEST.create('CATEGORY'))
+    });
+
+    iterator.hasNoMoreElements();
   });
 
 });

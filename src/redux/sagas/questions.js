@@ -1,5 +1,6 @@
-import { takeEvery, call, put, fork } from 'redux-saga/effects';
+import { takeEvery, call, put, select, fork } from 'redux-saga/effects';
 import * as actions from '../actions/all';
+import * as selectors from '../selectors/selectors';
 import api from '../api/api';
 
 export function* getQuestion({ category }) {
@@ -12,12 +13,23 @@ export function* getQuestion({ category }) {
   }
 }
 
+export function* nextQuestion() {
+  const category = yield select(selectors.getSelectedCategory);
+
+  yield put(actions.GET_QUESTION_REQUEST.create(category));
+}
+
 export function* listenGetQuestionRequest() {
   yield takeEvery(actions.GET_QUESTION_REQUEST.name, getQuestion);
 }
 
+export function* listenNextQuestion() {
+  yield takeEvery(actions.NEXT_QUESTION.name, nextQuestion);
+}
+
 export default function* rootSaga() {
   yield [
-    fork(listenGetQuestionRequest)
+    fork(listenGetQuestionRequest),
+    fork(listenNextQuestion)
   ];
 }
