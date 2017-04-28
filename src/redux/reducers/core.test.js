@@ -41,23 +41,25 @@ describe('Core Reducer', () => {
       // given
       const previousState = { page: 'any' };
 
-      const action = actions.GET_QUESTION_REQUEST.create();
+      const action = actions.GET_QUESTION_REQUEST.create('CATEGORY');
 
       // when / then
       reduce(previousState, action).byUsing(reducer).expectedNextState({
-        page: 'loading'
+        page: 'loading',
+        selectedCategory: 'CATEGORY'
       });
     });
 
     it('When question is received, should display the question', () => {
       // given
-      const previousState = { page: 'any' };
+      const previousState = { page: 'any', selectedCategory: 'CATEGORY' };
 
       const action = actions.GET_QUESTION_SUCCESS.create();
 
       // when / then
       reduce(previousState, action).byUsing(reducer).expectedNextState({
-        page: 'question'
+        page: 'question',
+        selectedCategory: 'CATEGORY'
       });
     });
   });

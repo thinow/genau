@@ -10,10 +10,10 @@ export default (state = createDefaultState(), action = {}) => {
       return { page: 'menu' };
 
     case actions.GET_QUESTION_REQUEST.name:
-      return { page: 'loading' };
+      return { page: 'loading', selectedCategory: action.category };
 
     case actions.GET_QUESTION_SUCCESS.name:
-      return { page: 'question' };
+      return { ...state, page: 'question' };
 
     default:
       return state;
