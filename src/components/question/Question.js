@@ -9,8 +9,8 @@ import { palette } from '../theme/theme';
 
 const style = {
   container: { textAlign: 'center' },
-  label: { marginTop: '16vh', fontWeight: 'bold', fontSize: '10vw' },
-  translation: { margin: '5vh 0', color: palette.disabledColor, fontSize: '4vw' },
+  label: { marginTop: '10vh', fontWeight: 'bold', fontSize: '10vw' },
+  translation: { margin: '2vh 0 14vh', color: palette.disabledColor, fontSize: '4vw' },
   button: { display: 'block', margin: '3vh 12vw' },
   next: { position: 'fixed', bottom: '4vh', right: '2vw' }
 };
