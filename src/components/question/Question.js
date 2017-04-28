@@ -23,11 +23,11 @@ const mapCallbacks = (dispatch) => ({
   onNextClick: () => dispatch(actions.GET_QUESTION_REQUEST.create())
 });
 
-const createButton = ({ value, onNextClick }) => (
+const createButton = ({ value }) => (
   <RaisedButton style={style.button} key={value} label={value} />
 );
 
-export default connect(mapProps, mapCallbacks)(({ question }) => (
+export default connect(mapProps, mapCallbacks)(({ question, onNextClick }) => (
   <div style={style.container}>
     <Text style={style.label}>{question.label}</Text>
     <Text style={style.translation}>{question.translation}</Text>
