@@ -11,7 +11,12 @@ export default class extends Component {
     const { style, option } = this.props;
     const { clicked } = this.state || {};
 
-    const label = clicked ? 'Genau!' : option.value;
-    return <RaisedButton style={style} label={label} onClick={this.onClick} />
+    if (!clicked) {
+      return <RaisedButton style={style} label={option.value} onClick={this.onClick} />
+    } else if (option.correct) {
+      return <RaisedButton style={style} label={'Genau!'} primary={true} />
+    } else {
+      return <RaisedButton style={style} label={'Falsch'} secondary={true} />
+    }
   }
 }
