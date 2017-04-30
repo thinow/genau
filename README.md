@@ -36,6 +36,9 @@ npm install
 
 # Run the development server
 npm run start
+
+# Run the tests
+npm run test
 ```
 
 You can send me your modifications [by creating a pull request](https://github.com/thinow/genau/pulls).
