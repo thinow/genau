@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import MenuItem from 'material-ui/MenuItem';
+import AppMenuIcon from './AppMenuIcon';
 import Loading from './loading/Loading';
 import Menu from './menu/Menu';
 import Question from './question/Question';
@@ -25,8 +22,7 @@ const mapProps = (state) => ({
 });
 
 const mapCallbacks = (dispatch) => ({
-  loadAppRequest: () => dispatch(actions.APP_LOADING_REQUEST.create()),
-  displayMenu: () => dispatch(actions.DISPLAY_MENU.create())
+  loadAppRequest: () => dispatch(actions.APP_LOADING_REQUEST.create())
 });
 
 export default connect(mapProps, mapCallbacks)(class extends Component {
@@ -34,18 +30,6 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
   componentDidMount() {
     this.props.loadAppRequest();
   }
-
-  createMenuIcon = () => (
-    <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}>
-      <MenuItem primaryText="Menu" onTouchTap={this.props.displayMenu} />
-    </IconMenu>
-  );
-
-  createAppBar = () => {
-    const icon = this.props.page === 'question' ? this.createMenuIcon() : NO_ICON;
-
-    return <AppBar title="Genau!" iconElementLeft={NO_ICON} iconElementRight={icon} />;
-  };
 
   createPageComponent = () => {
     const { component } = pages.find(({ name }) => name === this.props.page);
@@ -56,7 +40,7 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
   render() {
     return (
       <div>
-        {this.createAppBar()}
+        <AppBar title="Genau!" iconElementLeft={NO_ICON} iconElementRight={<AppMenuIcon />} />
         {this.createPageComponent()}
         <ErrorBar />
       </div>
