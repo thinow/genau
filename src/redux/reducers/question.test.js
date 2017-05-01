@@ -1,6 +1,7 @@
 import reducer from './question';
 import * as actions from '../actions/all';
 import { reduce } from './testHelper';
+import * as common from '../common/common';
 
 describe('Question Reducer', () => {
 
@@ -12,12 +13,19 @@ describe('Question Reducer', () => {
     // given
     const previousState = {};
 
-    const action = actions.GET_QUESTION_SUCCESS.create({ label: 'QUESTION' });
+    const action = actions.GET_QUESTION_SUCCESS.create({
+      label: 'QUESTION', category: 'CATEGORY', options: ['OPTION']
+    });
+
+    //noinspection JSAnnotator
+    common.sortOptions = jest.fn(() => 'SORTED-OPTIONS');
 
     // when / then
     reduce(previousState, action).byUsing(reducer).expectedNextState({
-      label: 'QUESTION'
+      label: 'QUESTION', category: 'CATEGORY', options: 'SORTED-OPTIONS'
     });
+
+    expect(common.sortOptions).toBeCalledWith('CATEGORY', ['OPTION'])
   });
 
 });
