@@ -1,7 +1,9 @@
-export const getPage = state => state.core.page;
+export const getPage = ({ core }) => core.page;
 
-export const getSelectedCategory = state => state.core.selectedCategory;
+export const getSelectedCategory = ({ core }) => core.selectedCategory;
 
-export const getCurrentQuestion = state => state.question;
+export const getCurrentQuestion = ({ question }) => question;
 
-export const getError = state => state.error;
+export const getNavigation = ({ navigation: items }) => ({ items, empty: items.length === 0 });
+
+export const getError = ({ error }) => error;

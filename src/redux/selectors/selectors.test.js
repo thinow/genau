@@ -34,6 +34,28 @@ describe('Selectors', () => {
     expect(selectors.getCurrentQuestion(state)).toEqual({ label: 'QUESTION' });
   });
 
+  describe('Navigation', () => {
+    it('Empty', () => {
+      // given
+      const state = {
+        navigation: []
+      };
+
+      // when / then
+      expect(selectors.getNavigation(state)).toEqual({ empty: true, items: [] });
+    });
+
+    it('Contains some items', () => {
+      // given
+      const state = {
+        navigation: ['anything']
+      };
+
+      // when / then
+      expect(selectors.getNavigation(state)).toEqual({ empty: false, items: ['anything'] });
+    });
+  });
+
   it('Error', () => {
     // given
     const state = {
