@@ -3,17 +3,13 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertical from 'material-ui/svg-icons/navigation/more-vert';
-import FastRewind from 'material-ui/svg-icons/av/fast-rewind';
-import BugReport from 'material-ui/svg-icons/action/bug-report';
 import { palette } from './theme/theme';
 import { connect } from 'react-redux';
 import * as selectors from '../redux/selectors/selectors';
 import * as actions from '../redux/actions/all';
 
-const open = (link) => window.open(link, '_blank');
-
 const mapProps = (state) => ({
-  page: selectors.getPage(state)
+  navigation: selectors.getNavigation(state)
 });
 
 const mapCallbacks = (dispatch) => ({
@@ -22,30 +18,31 @@ const mapCallbacks = (dispatch) => ({
 
 export default connect(mapProps, mapCallbacks)(class extends Component {
 
-  createMenuItems = () => {
-    const { page, displayMenu } = this.props;
+  open = (link) => window.open(link, '_blank');
 
-    switch (page) {
-      case 'question':
-        return [
-          { text: 'Menu', icon: <FastRewind />, onClick: displayMenu },
-          { text: 'Fehlermeldung', icon: <BugReport />, onClick: () => open('https://github.com/thinow/genau/issues/new') }
-        ];
+  createMenuItemComponent = (item) => {
+    switch (item) {
+
+      case 'menu':
+        return <MenuItem key={item} primaryText="Menü" onTouchTap={this.props.displayMenu} />;
+
+      case 'about':
+        return <MenuItem key={item} primaryText="Apropos" onTouchTap={() => this.open('https://github.com/thinow/genau#genau')} />;
 
       default:
-        return [];
+        throw `Unknown navigation item. value = ${item}`;
     }
   };
 
   render() {
-    const items = this.createMenuItems();
+    const { empty, items } = this.props.navigation;
 
-    if (items.length === 0) {
+    if (empty) {
       return <div></div>;
     } else {
       return (
         <IconMenu iconButtonElement={<IconButton><MoreVertical color={palette.canvasColor} /></IconButton>}>
-          {items.map(({ text, icon, onClick }) => <MenuItem key={text} primaryText={text} leftIcon={icon} onTouchTap={onClick} />)}
+          {items.map(this.createMenuItemComponent)}
         </IconMenu>
       );
     }
