@@ -1,15 +1,16 @@
 import * as actions from '../actions/all';
 
-const createDefaultState = () => ({ displayed: false });
+const createDefaultState = () => ([]);
 
 export default (state = createDefaultState(), action = {}) => {
   switch (action.type) {
 
-    case actions.ERROR_OCCURRED.name:
-      return { displayed: true };
-
-    case actions.ERROR_HIDDEN.name:
+    case actions.DISPLAY_MENU.name:
+    case actions.GET_QUESTION_REQUEST.name:
       return createDefaultState();
+
+    case actions.GET_QUESTION_SUCCESS.name:
+      return ['menu', 'about'];
 
     default:
       return state;
