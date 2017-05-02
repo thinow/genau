@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
+const labelStyle = { textTransform: 'none' };
+
 export default class extends Component {
 
   onClick = () => {
@@ -12,11 +14,11 @@ export default class extends Component {
     const { clicked } = this.state || {};
 
     if (!clicked) {
-      return <RaisedButton style={style} label={option.value} onClick={this.onClick} />
+      return <RaisedButton style={style} labelStyle={labelStyle} label={option.value} onClick={this.onClick} />;
     } else if (option.correct) {
-      return <RaisedButton style={style} label={'Genau!'} primary={true} />
+      return <RaisedButton style={style} labelStyle={labelStyle} label={'Genau!'} primary={true} />;
     } else {
-      return <RaisedButton style={style} label={'Falsch'} secondary={true} />
+      return <RaisedButton style={style} labelStyle={labelStyle} label={'Falsch'} secondary={true} />;
     }
   }
 }
