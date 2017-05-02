@@ -8,12 +8,14 @@ import reducers from './redux/reducers/all';
 import sagas from './redux/sagas/all';
 import App from './components/App';
 
+const DEBUG = process.env.NODE_ENV !== 'production';
+
 const saga = createSagaMiddleware();
-const logger = createLogger();
+const middleware = DEBUG ? applyMiddleware(saga, createLogger()) : applyMiddleware(saga);
 
 const store = createStore(
   reducers,
-  applyMiddleware(saga, logger)
+  middleware
 );
 
 saga.run(sagas);
