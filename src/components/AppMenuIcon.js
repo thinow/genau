@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import * as selectors from '../redux/selectors/selectors';
 import * as actions from '../redux/actions/all';
 
+const HOME_WEBSITE = 'https://github.com/thinow/genau/blob/master/README.md#genau';
+
 const mapProps = (state) => ({
   navigation: selectors.getNavigation(state)
 });
@@ -27,7 +29,7 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
         return <MenuItem key={item} primaryText="Menü" onTouchTap={this.props.displayMenu} />;
 
       case 'about':
-        return <MenuItem key={item} primaryText="Apropos" onTouchTap={() => this.open('https://github.com/thinow/genau#genau')} />;
+        return <MenuItem key={item} primaryText="Apropos" onTouchTap={() => this.open(HOME_WEBSITE)} />;
 
       default:
         throw `Unknown navigation item. value = ${item}`;
