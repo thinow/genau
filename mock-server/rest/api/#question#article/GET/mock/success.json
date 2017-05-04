@@ -2,16 +2,11 @@
   "category": "article",
   "label": "Objekt",
   "translation": "object",
-  "options": [
-    {
-      "value": "das",
-      "correct": true
-    },
-    {
-      "value": "der"
-    },
-    {
-      "value": "die"
-    }
-  ]
+  "answers": {
+    "right": "das",
+    "wrong": [
+      "der",
+      "die"
+    ]
+  }
 }

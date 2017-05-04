@@ -1,40 +1,36 @@
-import { sortOptions } from './common';
+import { transformAnswers } from './common';
 import freeze from 'deep-freeze';
+import * as shuffle from 'shuffle-array';
 
 describe('Common functions (Redux)', () => {
 
-  describe('Sort options', () => {
-    it('Article category, should be DER/DIE/DAS', () => {
+  describe('Transform answer', () => {
+    it('Change the model', () => {
       // when
-      const sorted = sortOptions('article', freeze([
-        { value: 'die', correct: true },
-        { value: 'der' },
-        { value: 'das' }
-      ]));
+      const transformed = transformAnswers('any-category', freeze({
+        right: 'RIGHT-ANSWER',
+        wrong: ['WRONG-ANSWER', 'ANOTHER-WRONG-ANSWER']
+      }));
 
       // then
-      expect(sorted).toEqual([
+      expect(transformed).toContainEqual({ value: 'RIGHT-ANSWER', correct: true });
+      expect(transformed).toContainEqual({ value: 'WRONG-ANSWER' });
+      expect(transformed).toContainEqual({ value: 'ANOTHER-WRONG-ANSWER' });
+    });
+
+    it('Article category, should be DER/DIE/DAS', () => {
+      // when
+      const transformed = transformAnswers('article', freeze({
+        right: 'die',
+        wrong: ['das', 'der']
+      }));
+
+      // then
+      expect(transformed).toEqual([
         { value: 'der' },
         { value: 'die', correct: true },
         { value: 'das' }
       ]);
-    });
-
-    it('Other categories, shuffle options', () => {
-      // given
-      const options = [
-        { value: 'one', correct: true },
-        { value: 'two' },
-        { value: 'three' }
-      ];
-
-      // when
-      const sorted = sortOptions('anything else', freeze(options));
-
-      // then
-      options.forEach(option => {
-        expect(sorted).toContain(option);
-      });
     });
   });
 

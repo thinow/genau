@@ -1,9 +1,9 @@
 import * as actions from '../actions/all';
-import { sortOptions } from '../common/common';
+import { transformAnswers } from '../common/common';
 
 const createDefaultState = () => ({});
 
-const sort = ({ category, options }) => sortOptions(category, options);
+const sort = ({ category, answers }) => transformAnswers(category, answers);
 
 export default (state = createDefaultState(), action = {}) => {
   switch (action.type) {
@@ -11,7 +11,7 @@ export default (state = createDefaultState(), action = {}) => {
     case actions.GET_QUESTION_SUCCESS.name:
       return {
         ...action.question,
-        options: sort(action.question)
+        answers: sort(action.question)
       };
 
     default:

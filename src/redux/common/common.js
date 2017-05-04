@@ -1,15 +1,22 @@
 import shuffle from 'shuffle-array';
 
-export const sortOptions = (category, options) => {
+const changeModel = ({ right, wrong }) => ([
+  { value: right, correct: true },
+  ...wrong.map(value => ({ value }))
+]);
+
+export const transformAnswers = (category, answers) => {
+  const array = changeModel(answers);
+
   switch (category) {
     case 'article':
       return [
-        options.find(({ value }) => value === 'der'),
-        options.find(({ value }) => value === 'die'),
-        options.find(({ value }) => value === 'das')
+        array.find(({ value }) => value === 'der'),
+        array.find(({ value }) => value === 'die'),
+        array.find(({ value }) => value === 'das')
       ];
 
     default:
-      return shuffle(options, { copy: true });
+      return shuffle(array);
   }
 };

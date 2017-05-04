@@ -10,12 +10,12 @@ export default class extends Component {
   };
 
   render() {
-    const { style, option } = this.props;
+    const { style, answer } = this.props;
     const { clicked } = this.state || {};
 
     if (!clicked) {
-      return <RaisedButton style={style} labelStyle={labelStyle} label={option.value} onClick={this.onClick} />;
-    } else if (option.correct) {
+      return <RaisedButton style={style} labelStyle={labelStyle} label={answer.value} onClick={this.onClick} />;
+    } else if (answer.correct) {
       return <RaisedButton style={style} labelStyle={labelStyle} label={'Genau!'} primary={true} />;
     } else {
       return <RaisedButton style={style} labelStyle={labelStyle} label={'Falsch'} secondary={true} />;

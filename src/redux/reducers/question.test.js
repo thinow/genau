@@ -14,18 +14,18 @@ describe('Question Reducer', () => {
     const previousState = {};
 
     const action = actions.GET_QUESTION_SUCCESS.create({
-      label: 'QUESTION', category: 'CATEGORY', options: ['OPTION']
+      label: 'QUESTION', category: 'CATEGORY', answers: 'ORIGINAL-ANSWERS'
     });
 
     //noinspection JSAnnotator
-    common.sortOptions = jest.fn(() => 'SORTED-OPTIONS');
+    common.transformAnswers = jest.fn(() => 'TRANSFORMED-ANSWERS');
 
     // when / then
     reduce(previousState, action).byUsing(reducer).expectedNextState({
-      label: 'QUESTION', category: 'CATEGORY', options: 'SORTED-OPTIONS'
+      label: 'QUESTION', category: 'CATEGORY', answers: 'TRANSFORMED-ANSWERS'
     });
 
-    expect(common.sortOptions).toBeCalledWith('CATEGORY', ['OPTION'])
+    expect(common.transformAnswers).toBeCalledWith('CATEGORY', 'ORIGINAL-ANSWERS')
   });
 
 });

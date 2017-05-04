@@ -4,7 +4,7 @@ import * as selectors from '../../redux/selectors/selectors';
 import * as actions from '../../redux/actions/all';
 import FlatButton from 'material-ui/FlatButton';
 import Text from '../core/Text';
-import OptionButton from './OptionButton';
+import Answer from './Answer';
 import { palette } from '../theme/theme';
 
 const style = {
@@ -12,7 +12,7 @@ const style = {
   label: { marginTop: '8vh', fontWeight: 'bold', fontSize: '10vw' },
   translation: { margin: '2vh 0 6vh', color: palette.disabledColor, fontSize: '4vw' },
   explanation: { color: palette.primary1Color, fontSize: '4vw' },
-  option: { display: 'block', margin: '3vh 12vw' },
+  answer: { display: 'block', margin: '3vh 12vw' },
   next: { position: 'fixed', bottom: '4vh', right: '2vw' }
 };
 
@@ -35,8 +35,8 @@ const findExplanation = (question) => {
   return explanations.find(({ category }) => category === question.category).text;
 };
 
-const createButton = (option) => (
-  <OptionButton style={style.option} key={option.value} option={option} />
+const createButton = (answer) => (
+  <Answer style={style.answer} key={answer.value} answer={answer} />
 );
 
 export default connect(mapProps, mapCallbacks)(({ question, onNextClick }) => (
@@ -44,7 +44,7 @@ export default connect(mapProps, mapCallbacks)(({ question, onNextClick }) => (
     <Text style={style.label}>{question.label}</Text>
     <Text style={style.translation}>{question.translation}</Text>
     <Text style={style.explanation}>{findExplanation(question)}</Text>
-    {question.options.map(createButton)}
+    {question.answers.map(createButton)}
     <FlatButton style={style.next} label="Weiter" primary={true} onClick={onNextClick} />
   </div>
 ));
