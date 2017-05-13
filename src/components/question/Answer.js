@@ -1,24 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import { palette } from '../theme/theme';
 
-const labelStyle = { textTransform: 'none' };
+const labelStyle = {
+  textTransform: 'none',
+  color: palette.alternateTextColor
+};
 
-export default class extends Component {
+const mapProps = (state, ownProps) => ownProps;
+
+const mapCallbacks = () => ({});
+
+export default connect(mapProps, mapCallbacks)(class extends Component {
 
   onClick = () => {
     this.setState({ clicked: true })
   };
 
+  createButton = (buttonProps) => {
+    const { style } = this.props;
+    return React.createElement(RaisedButton, { style, labelStyle, ...buttonProps });
+  };
+
   render() {
-    const { style, answer } = this.props;
+    const { answer } = this.props;
     const { clicked } = this.state || {};
 
     if (!clicked) {
-      return <RaisedButton style={style} labelStyle={labelStyle} label={answer.value} onClick={this.onClick} />;
+      return this.createButton({ label: answer.value, primary: true, onClick: this.onClick });
     } else if (answer.correct) {
-      return <RaisedButton style={style} labelStyle={labelStyle} label={'Genau!'} primary={true} />;
+      return this.createButton({ label: 'Genau!', backgroundColor: palette.goodAnswer });
     } else {
-      return <RaisedButton style={style} labelStyle={labelStyle} label={'Falsch'} secondary={true} />;
+      return this.createButton({ label: 'Falsch', labelStyle: { ...labelStyle, color: palette.accent1Color } });
     }
   }
-}
+});
