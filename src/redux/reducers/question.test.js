@@ -3,6 +3,8 @@ import * as actions from '../actions/all';
 import { reduce } from './testHelper';
 import * as common from '../common/common';
 
+const CORRECT = true;
+
 describe('Question Reducer', () => {
 
   it('Default State', () => reduce(undefined).byUsing(reducer).expectedNextState({}));
@@ -26,6 +28,20 @@ describe('Question Reducer', () => {
     });
 
     expect(common.transformAnswers).toBeCalledWith('CATEGORY', 'ORIGINAL-ANSWERS')
+  });
+
+  it('When an answer has been chosen, store result', () => {
+    // given
+    const previousState = {
+      label: 'QUESTION'
+    };
+
+    const action = actions.CHOOSE_ANSWER.create(CORRECT);
+
+    // when / then
+    reduce(previousState, action).byUsing(reducer).expectedNextState({
+      label: 'QUESTION', goodAnswer: CORRECT
+    });
   });
 
 });

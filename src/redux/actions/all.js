@@ -23,6 +23,11 @@ export const GET_QUESTION_SUCCESS = {
   create: (question) => ({ type: 'GET_QUESTION_SUCCESS', question })
 };
 
+export const CHOOSE_ANSWER = {
+  name: 'CHOOSE_ANSWER',
+  create: (correct) => ({ type: 'CHOOSE_ANSWER', correct })
+};
+
 export const NEXT_QUESTION = {
   name: 'NEXT_QUESTION',
   create: () => ({ type: 'NEXT_QUESTION' })

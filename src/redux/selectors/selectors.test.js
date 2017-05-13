@@ -56,6 +56,28 @@ describe('Selectors', () => {
     });
   });
 
+  describe('Answer', () => {
+    it('Did the user give the good answer', () => {
+      // given
+      const state = {
+        question: { goodAnswer: true }
+      };
+
+      // when / then
+      expect(selectors.didUserGiveTheGoodAnswer(state)).toEqual(true);
+    });
+
+    it('Contains some items', () => {
+      // given
+      const state = {
+        navigation: ['anything']
+      };
+
+      // when / then
+      expect(selectors.getNavigation(state)).toEqual({ empty: false, items: ['anything'] });
+    });
+  });
+
   it('Error', () => {
     // given
     const state = {

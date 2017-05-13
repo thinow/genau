@@ -14,6 +14,12 @@ export default (state = createDefaultState(), action = {}) => {
         answers: sort(action.question)
       };
 
+    case actions.CHOOSE_ANSWER.name:
+      return {
+        ...state,
+        goodAnswer: action.correct
+      };
+
     default:
       return state;
   }
