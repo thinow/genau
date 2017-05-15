@@ -17,8 +17,16 @@ const pages = [
   { name: 'question', component: Question }
 ];
 
+const titles = [
+  { category: 'article', text: 'Artikel von...' },
+  { category: 'plural', text: 'Plural von...' },
+  { category: 'simple-past', text: 'Präteritum von...' },
+  { category: 'perfect', text: 'Perfekt von...' }
+];
+
 const mapProps = (state) => ({
-  page: selectors.getPage(state)
+  page: selectors.getPage(state),
+  currentQuestion: selectors.getCurrentQuestion(state)
 });
 
 const mapCallbacks = (dispatch) => ({
@@ -31,6 +39,16 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
     this.props.loadAppRequest();
   }
 
+  findTitlePerQuestion = (question) => {
+    return titles.find(({ category }) => category === question.category).text;
+  };
+
+  getTitle = () => {
+    const { page, currentQuestion } = this.props;
+
+    return page === 'question' ? this.findTitlePerQuestion(currentQuestion) : 'Genau!';
+  };
+
   createPageComponent = () => {
     const { component } = pages.find(({ name }) => name === this.props.page);
 
@@ -40,7 +58,7 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
   render() {
     return (
       <div>
-        <AppBar title="Genau!" iconElementLeft={NO_ICON} iconElementRight={<AppMenuIcon />} />
+        <AppBar title={this.getTitle()} iconElementLeft={NO_ICON} iconElementRight={<AppMenuIcon />} />
         {this.createPageComponent()}
         <ErrorBar />
       </div>
