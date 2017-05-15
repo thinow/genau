@@ -13,9 +13,9 @@ describe('Common functions (Redux)', () => {
       }));
 
       // then
-      expect(transformed).toContainEqual({ value: 'RIGHT-ANSWER', correct: true });
-      expect(transformed).toContainEqual({ value: 'WRONG-ANSWER' });
-      expect(transformed).toContainEqual({ value: 'ANOTHER-WRONG-ANSWER' });
+      expect(transformed).toContainEqual({ index: 0, value: 'RIGHT-ANSWER', correct: true });
+      expect(transformed).toContainEqual({ index: 1, value: 'WRONG-ANSWER' });
+      expect(transformed).toContainEqual({ index: 2, value: 'ANOTHER-WRONG-ANSWER' });
     });
 
     it('Article category, should be DER/DIE/DAS', () => {
@@ -27,9 +27,9 @@ describe('Common functions (Redux)', () => {
 
       // then
       expect(transformed).toEqual([
-        { value: 'der' },
-        { value: 'die', correct: true },
-        { value: 'das' }
+        { index: 2, value: 'der' },
+        { index: 0, value: 'die', correct: true },
+        { index: 1, value: 'das' }
       ]);
     });
   });

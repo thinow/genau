@@ -1,8 +1,8 @@
 import shuffle from 'shuffle-array';
 
 const changeModel = ({ right, wrong }) => ([
-  { value: right, correct: true },
-  ...wrong.map(value => ({ value }))
+  { index: 0, value: right, correct: true },
+  ...wrong.map((value, index) => ({ index: index + 1, value }))
 ]);
 
 export const transformAnswers = (category, answers) => {
