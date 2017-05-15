@@ -16,7 +16,7 @@ const mapProps = (state, ownProps) => ({
 });
 
 const mapCallbacks = (dispath) => ({
-  notifyChoice: answer => dispath(actions.CHOOSE_ANSWER.create(answer.correct))
+  notifyChoice: answer => dispath(actions.CHOOSE_ANSWER.create(answer))
 });
 
 export default connect(mapProps, mapCallbacks)(class extends Component {

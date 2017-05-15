@@ -25,7 +25,7 @@ export const GET_QUESTION_SUCCESS = {
 
 export const CHOOSE_ANSWER = {
   name: 'CHOOSE_ANSWER',
-  create: (correct) => ({ type: 'CHOOSE_ANSWER', correct })
+  create: (answer) => ({ type: 'CHOOSE_ANSWER', answer })
 };
 
 export const NEXT_QUESTION = {
