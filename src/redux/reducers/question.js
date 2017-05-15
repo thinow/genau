@@ -27,7 +27,8 @@ export default (state = createDefaultState(), action = {}) => {
     case actions.CHOOSE_ANSWER.name:
       return {
         ...state,
-        answers: flagAnswersAsChosen(state.answers, action.answer)
+        answers: flagAnswersAsChosen(state.answers, action.answer),
+        resolved: action.answer.correct
       };
 
     default:

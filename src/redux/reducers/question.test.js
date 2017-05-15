@@ -30,43 +30,61 @@ describe('Question Reducer', () => {
     expect(common.transformAnswers).toBeCalledWith('CATEGORY', 'ORIGINAL-ANSWERS')
   });
 
-  it('When an answer has been chosen, flag as chosen', () => {
-    // given
-    const previousState = {
-      label: 'QUESTION', answers: [
-        { index: 0, value: 'first-answer' },
-        { index: 1, value: 'second-answer' }
-      ]
-    };
+  describe('Chosen answer', () => {
+    it('When an answer has been chosen, flag as chosen', () => {
+      // given
+      const previousState = {
+        label: 'QUESTION', answers: [
+          { index: 0, value: 'first-answer' },
+          { index: 1, value: 'second-answer' }
+        ]
+      };
 
-    const action = actions.CHOOSE_ANSWER.create({ index: 1, value: 'second-answer' });
+      const action = actions.CHOOSE_ANSWER.create({ index: 1, value: 'second-answer' });
 
-    // when / then
-    reduce(previousState, action).byUsing(reducer).expectedNextState({
-      label: 'QUESTION', answers: [
-        { index: 0, value: 'first-answer' },
-        { index: 1, value: 'second-answer', chosen: true }
-      ]
+      // when / then
+      reduce(previousState, action).byUsing(reducer).expectedNextState({
+        label: 'QUESTION', answers: [
+          { index: 0, value: 'first-answer' },
+          { index: 1, value: 'second-answer', chosen: true }
+        ]
+      });
     });
-  });
 
-  it('When the good answer has been chosen, flag every answers as chosen', () => {
-    // given
-    const previousState = {
-      label: 'QUESTION', answers: [
-        { index: 0, value: 'first-answer' },
-        { index: 1, value: 'second-answer', correct: true }
-      ]
-    };
+    it('When the good answer has been chosen, flag every answers as chosen', () => {
+      // given
+      const previousState = {
+        label: 'QUESTION', answers: [
+          { index: 0, value: 'first-answer' },
+          { index: 1, value: 'second-answer', correct: true }
+        ]
+      };
 
-    const action = actions.CHOOSE_ANSWER.create({ index: 1, value: 'second-answer', correct: true });
+      const action = actions.CHOOSE_ANSWER.create({ index: 1, value: 'second-answer', correct: true });
 
-    // when / then
-    reduce(previousState, action).byUsing(reducer).expectedNextState({
-      label: 'QUESTION', answers: [
-        { index: 0, value: 'first-answer', chosen: true },
-        { index: 1, value: 'second-answer', correct: true, chosen: true }
-      ]
+      // when / then
+      reduce(previousState, action).byUsing(reducer).expectedNextState({
+        label: 'QUESTION',
+        answers: [
+          { index: 0, value: 'first-answer', chosen: true },
+          { index: 1, value: 'second-answer', correct: true, chosen: true }
+        ],
+        resolved: true
+      });
+    });
+
+    it('When the good answer has been chosen, the question is resolved', () => {
+      // given
+      const previousState = {
+        label: 'QUESTION', answers: []
+      };
+
+      const action = actions.CHOOSE_ANSWER.create({ correct: true });
+
+      // when / then
+      reduce(previousState, action).byUsing(reducer).expectedNextState({
+        label: 'QUESTION', answers: [], resolved: true
+      });
     });
   });
 

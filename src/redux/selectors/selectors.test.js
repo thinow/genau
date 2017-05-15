@@ -57,16 +57,6 @@ describe('Selectors', () => {
   });
 
   describe('Answer', () => {
-    it('Did the user give the good answer', () => {
-      // given
-      const state = {
-        question: { goodAnswer: true }
-      };
-
-      // when / then
-      expect(selectors.didUserGiveTheGoodAnswer(state)).toEqual(true);
-    });
-
     it('Contains some items', () => {
       // given
       const state = {

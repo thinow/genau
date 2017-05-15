@@ -16,8 +16,7 @@ const style = {
 };
 
 const mapProps = (state) => ({
-  question: selectors.getCurrentQuestion(state),
-  goodAnswer: selectors.didUserGiveTheGoodAnswer(state)
+  question: selectors.getCurrentQuestion(state)
 });
 
 const mapCallbacks = (dispatch) => ({
@@ -25,14 +24,14 @@ const mapCallbacks = (dispatch) => ({
 });
 
 const createButton = (answer) => (
-  <Answer style={style.answer} key={answer.value} answer={answer} />
+  <Answer style={style.answer} key={answer.index} answer={answer} />
 );
 
-export default connect(mapProps, mapCallbacks)(({ question, goodAnswer, onNextClick }) => (
+export default connect(mapProps, mapCallbacks)(({ question, onNextClick }) => (
   <div style={style.container}>
     <Text style={style.label}>{question.label}</Text>
     <Text style={style.translation}>{question.translation}</Text>
-    {question.answers.map(createButton)}
-    { goodAnswer && <RaisedButton style={style.next} label="Weiter" primary={true} onClick={onNextClick} /> }
+    { question.answers.map(createButton) }
+    { question.resolved && <RaisedButton style={style.next} label="Weiter" primary={true} onClick={onNextClick} /> }
   </div>
 ));

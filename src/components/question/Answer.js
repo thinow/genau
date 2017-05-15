@@ -10,23 +10,13 @@ const labelStyle = {
   color: palette.alternateTextColor
 };
 
-const mapProps = (state, ownProps) => ({
-  ...ownProps,
-  userGaveTheGoodAnswer: selectors.didUserGiveTheGoodAnswer(state)
-});
+const mapProps = (state, ownProps) => ownProps;
 
 const mapCallbacks = (dispath) => ({
-  notifyChoice: answer => dispath(actions.CHOOSE_ANSWER.create(answer))
+  onClick: answer => dispath(actions.CHOOSE_ANSWER.create(answer))
 });
 
 export default connect(mapProps, mapCallbacks)(class extends Component {
-
-  onClick = () => {
-    const { answer, notifyChoice } = this.props;
-
-    this.setState({ clicked: true });
-    notifyChoice(answer)
-  };
 
   createButton = (buttonProps) => {
     const { style } = this.props;
@@ -34,17 +24,12 @@ export default connect(mapProps, mapCallbacks)(class extends Component {
   };
 
   render() {
-    const { answer, userGaveTheGoodAnswer } = this.props;
-    const { clicked } = this.state || {};
+    const { answer, onClick } = this.props;
 
-    if (userGaveTheGoodAnswer) {
-      if (answer.correct) {
-        return this.createButton({ label: 'Genau!', backgroundColor: palette.goodAnswer });
-      } else {
-        return this.createButton({ label: 'Falsch', labelStyle: { ...labelStyle, color: palette.accent1Color } });
-      }
-    } else if (!clicked) {
-      return this.createButton({ label: answer.value, primary: true, onClick: this.onClick });
+    if (!answer.chosen) {
+      return this.createButton({ label: answer.value, primary: true, onClick: () => onClick(answer) });
+    } else if (answer.correct) {
+      return this.createButton({ label: 'Genau!', backgroundColor: palette.goodAnswer });
     } else {
       return this.createButton({ label: 'Falsch', labelStyle: { ...labelStyle, color: palette.accent1Color } });
     }
