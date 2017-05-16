@@ -57,14 +57,20 @@ describe('Selectors', () => {
   });
 
   describe('Answer', () => {
-    it('Contains some items', () => {
+    it('Get correct answer', () => {
       // given
       const state = {
-        navigation: ['anything']
+        question: {
+          answers: [
+            { value: 'one' },
+            { value: 'two', correct: true },
+            { value: 'three' }
+          ]
+        }
       };
 
       // when / then
-      expect(selectors.getNavigation(state)).toEqual({ empty: false, items: ['anything'] });
+      expect(selectors.getCorrectAnswer(state)).toEqual({ value: 'two', correct: true });
     });
   });
 
